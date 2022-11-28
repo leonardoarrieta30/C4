@@ -6,7 +6,7 @@ workspace {
         autoridad = person "Autoridad"
 
         sistemaPandemia = softwareSystem "Sistema de gestion de pandemia" "sistema que permite la gestion y notificacion de brotes de pandemia" "SistemaPandemia"{
-            webApp = container "Aplicacion web"
+            webApp = container "Aplicacion web" "Aplicacion web que permite utilizar funcionalidades de registro" "Angular""WebApp"
             mobileApp = container "Aplicacion movil"
             landingPage = container "landing page"
             database = container "Base de datos"
@@ -63,12 +63,20 @@ workspace {
         notificacion -> sistemaNotificacion "Notifica nuevo paciente o ciudadano"
 
         webApp -> localizacion "visualiza movimiento del paciente"
-
         localizacion -> sistemaLocalizacion "Solicita el movimiento del paciente"
 
-        webApp -> seguimiento "visualiza el seguiiento del paciente"
+        webApp -> seguimiento "visualiza el estado de salud del paciente"
+        seguimiento -> sistemaSaludPublico "Solicita el estado de salud del paciente"
 
-        seguimiento -> sistemaSaludPublico "Solicita el seguimiento del paciente"
+        reporte -> sistemaAnaliticas "obtiene analiticas sobre posibles brotes"
+
+
+        mobileApp -> localizacion "visualiza movimiento del paciente"
+
+
+        mobileApp -> seguimiento "visualiza el estado de salud del paciente"
+   
+        
 
     }
 
@@ -91,7 +99,16 @@ workspace {
                 background #905620
                 color #ffffff
             }
-            
+            element "Software System" {
+                shape RoundedBox
+                background #2589B5
+                color #ffffff
+            }
+            element "Container" {
+                shape RoundedBox
+                background #e28743
+                color #ffffff
+            }
         }
     }
 }
